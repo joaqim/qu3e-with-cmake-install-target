@@ -106,7 +106,11 @@ if(qu3e_build_shared)
 		CLEAN_DIRECT_OUTPUT 1
 		VERSION ${qu3e_version}
 	)
+
+      install(TARGETS qu3e_shared LIBRARY DESTINATION lib)
 endif()
+
+#install(TARGETS qu3e LIBRARY DESTINATION lib)
 
 if(qu3e_build_static)
 	add_library(qu3e STATIC
@@ -131,6 +135,9 @@ if(qu3e_build_static)
 		CLEAN_DIRECT_OUTPUT 1
 		VERSION ${qu3e_version}
 	)
+
+        # TODO: Should this be RUNTIME instad of LIBRARY ?
+        install(TARGETS qu3e LIBRARY DESTINATION lib)
 endif()
 
 source_group(broadphase FILES ${qu3e_broadphase_srcs} ${qu3e_broadphase_hdrs})
@@ -141,3 +148,12 @@ source_group(dynamics FILES ${qu3e_dynamics_srcs} ${qu3e_dynamics_hdrs})
 source_group(math FILES ${qu3e_math_srcs} ${qu3e_math_hdrs})
 source_group(scene FILES ${qu3e_scene_srcs} ${qu3e_scene_hdrs})
 source_group(Include FILES ${qu3e_hdr})
+
+install(FILES ${qu3e_broadphase_hdrs} DESTINATION include/qu3e/broadphase)
+install(FILES ${qu3e_collision_hdrs} DESTINATION include/qu3e/collision)
+install(FILES ${qu3e_common_hdrs} DESTINATION include/qu3e/common)
+install(FILES ${qu3e_debug_hdrs} DESTINATION include/qu3e/debug)
+install(FILES ${qu3e_dynamics_hdrs} DESTINATION include/qu3e/dynamics)
+install(FILES ${qu3e_math_hdrs} DESTINATION include/qu3e/math)
+install(FILES ${qu3e_scene_hdrs} DESTINATION include/qu3e/scene)
+install(FILES ${qu3e_hdr} DESTINATION include/qu3e)
